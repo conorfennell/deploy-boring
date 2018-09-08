@@ -1,9 +1,11 @@
-prometheus:
-  hasVolume: true
-  domain: example.com
+hasVolume: true
+dns:
+  enabled: false
 
-## remove these configs
-namespace: observe
+## config
 
-alertmanager:
-  domain: example.com
+# hasVolume: true
+# dns:
+#  enabled: true
+#  domain: example.com
+# namespace: observe

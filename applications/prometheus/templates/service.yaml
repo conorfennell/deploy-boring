@@ -4,8 +4,10 @@ metadata:
   name: prometheus
   labels:
     app: prometheus
+  {{ if .Values.dns.enabled }}
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: prometheus.{{ .Values.prometheus.domain }}.
+    external-dns.alpha.kubernetes.io/hostname: prometheus.{{ .Values.dns.domain }}.
+  {{ end }}
 spec:
   type: LoadBalancer
   ports:

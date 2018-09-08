@@ -5,8 +5,10 @@ metadata:
   name: alertmanager
   labels:
     app: alertmanager
+  {{ if .Values.dns.enabled }}
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: alertmanager.{{ .Values.alertmanager.domain }}.
+    external-dns.alpha.kubernetes.io/hostname: alertmanager.{{ .Values.dns.domain }}.
+  {{ end }}
 spec:
   type: LoadBalancer
   ports:

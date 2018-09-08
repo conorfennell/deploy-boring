@@ -1,45 +1,45 @@
-# ---
-# apiVersion: monitoring.coreos.com/v1
-# kind: Prometheus
-# metadata:
-#   name: prometheus
-# spec:
-#   replicas: 1
-#   retention: 1w
-#   alerting:
-#     alertmanagers:
-#     - namespace: {{ .Values.namespace }}
-#       name: alertmanager
-#       port: web
-#   serviceAccountName: prometheus
-#   serviceMonitorNamespaceSelector:
-#     matchLabels:
-#       prometheus/shared: "true"
-#   serviceMonitorSelector:
-#     matchLabels:
-#       prometheus/shared: "true"
-#   ruleNamespaceSelector:
-#     matchLabels:
-#       prometheus/shared: "true"
-#   ruleSelector:
-#     matchLabels:
-#       prometheus/shared: "true"
-#   resources:
-#     requests:
-#       memory: 2048Mi
-#       cpu: 1000m
-#     limits:
-#       memory: 2048Mi
-#       cpu: 1000m
-#   {{ if .Values.prometheus.hasVolume }}    
-#   storage:
-#     volumeClaimTemplate:
-#       metadata:
-#         name: prometheus-data
-#       spec:
-#         storageClassName: ebs-gp2
-#         accessModes: [ "ReadWriteOnce" ]
-#         resources:
-#           requests:
-#             storage: 50Gi
-#   {{ end }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+spec:
+  replicas: 1
+  retention: 1w
+  alerting:
+    alertmanagers:
+    - namespace: {{ .Values.namespace }}
+      name: alertmanager
+      port: web
+  serviceAccountName: prometheus
+  serviceMonitorNamespaceSelector:
+    matchLabels:
+      prometheus/shared: "true"
+  serviceMonitorSelector:
+    matchLabels:
+      prometheus/shared: "true"
+  ruleNamespaceSelector:
+    matchLabels:
+      prometheus/shared: "true"
+  ruleSelector:
+    matchLabels:
+      prometheus/shared: "true"
+  resources:
+    requests:
+      memory: 2048Mi
+      cpu: 1000m
+    limits:
+      memory: 2048Mi
+      cpu: 1000m
+  {{ if .Values.prometheus.hasVolume }}    
+  storage:
+    volumeClaimTemplate:
+      metadata:
+        name: prometheus-data
+      spec:
+        storageClassName: ebs-gp2
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 50Gi
+  {{ end }}
