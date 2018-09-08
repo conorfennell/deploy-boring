@@ -1,6 +1,6 @@
 global:
   resolve_timeout: 5m
-  # team-ratpack-news channel webhook
+  # team-news channel webhook
   slack_api_url: 'https://hooks.slack.com/services/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'
 route:
   # This is the default receiver, is nothing else matches...
@@ -30,6 +30,6 @@ receivers:
   slack_configs:
   - channel: '#remove-me'
     title: "{{ .GroupLabels.alertname }} - {{ .Status | toUpper }}"
-    title_link: "http://alertmanager.search-platform.prod.hbccommon.private.hbc.com/"
+    title_link: "http://alertmanager.example.com/"
     text: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
     send_resolved: true
