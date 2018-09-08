@@ -31,7 +31,7 @@ spec:
     limits:
       memory: 2048Mi
       cpu: 1000m
-  {{ if .Values.prometheus.hasVolume }}    
+  {{ if .Values.hasVolume }}
   storage:
     volumeClaimTemplate:
       metadata:
