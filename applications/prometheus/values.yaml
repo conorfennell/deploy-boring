@@ -1,0 +1,9 @@
+prometheus:
+  hasVolume: true
+  domain: example.com
+
+## remove these configs
+namespace: observe
+
+alertmanager:
+  domain: example.com

@@ -1,0 +1,35 @@
+global:
+  resolve_timeout: 5m
+  # team-ratpack-news channel webhook
+  slack_api_url: 'https://hooks.slack.com/services/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'
+route:
+  # This is the default receiver, is nothing else matches...
+  receiver: 'default-receiver'
+  group_by: ['alertname']
+  # When a new group of alerts is created by an incoming alert, wait at
+  # least 'group_wait' to send the initial notification.
+  # This way ensures that you get multiple alerts for the same group that start
+  # firing shortly after another are batched together on the first
+  # notification.
+  group_wait: 30s
+
+  # When the first notification was sent, wait 'group_interval' to send a batch
+  # of new alerts that started firing for that group.
+  group_interval: 5m
+
+  # If an alert has successfully been sent, wait 'repeat_interval' to
+  # resend them.
+  repeat_interval: 1h
+
+  # All the above attributes are inherited by all child routes and can
+  # overwritten on each.
+
+  # The child route trees.  
+receivers:
+- name: 'default-receiver'
+  slack_configs:
+  - channel: '#remove-me'
+    title: "{{ .GroupLabels.alertname }} - {{ .Status | toUpper }}"
+    title_link: "http://alertmanager.search-platform.prod.hbccommon.private.hbc.com/"
+    text: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
+    send_resolved: true

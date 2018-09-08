@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager
+  labels:
+    app: alertmanager
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: alertmanager.{{ .Values.alertmanager.domain }}.
+spec:
+  type: LoadBalancer
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: web
+  selector:
+    alertmanager: alertmanager
