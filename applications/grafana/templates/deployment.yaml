@@ -23,7 +23,7 @@ spec:
       labels:
         app: grafana
     spec:
-      serviceAccountName: grafana-dashboard
+      serviceAccountName: grafana
       containers:
         - name: grafana
           image: grafana/grafana:5.2.0
