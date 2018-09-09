@@ -1,5 +1,5 @@
 ---
-alert manager will not start up without a valid secret config map
+# alert manager will not start up without a valid secret config map
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
