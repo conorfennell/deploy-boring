@@ -11,6 +11,5 @@
 # domain: example.com
 # namespace: observe
 
-hasVolume: true
 dns:
   enabled: false

@@ -7,17 +7,6 @@ metadata:
     app: grafana
 spec:
   replicas: 1
-  {{ if .Values.hasVolume }}
-  volumeClaimTemplates:
-  - metadata:
-      name: grafana
-    spec:
-      storageClassName: ebs-gp2
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 10Gi
-  {{ end }}
   template:
     metadata:
       labels:
@@ -36,11 +25,6 @@ spec:
           volumeMounts:
           - name: dashboards
             mountPath: /etc/grafana/dashboards/
-          {{ if .Values.hasVolume }}  
-          - name: grafana-storage
-            mountPath: /var/lib/grafana
-            readOnly: false
-          {{ end }}
           - name: grafana-ini
             mountPath: /etc/grafana
             readOnly: true
@@ -94,12 +78,7 @@ spec:
         fsGroup: 472
       volumes:
         - name: dashboards
-          emptyDir: {}
-        {{ if .Values.hasVolume }}
-        - name: grafana-storage
-          persistentVolumeClaim:
-            claimName: grafana
-        {{ end }}    
+          emptyDir: {} 
         - name: grafana-ini
           configMap:
             name: grafana-ini
