@@ -1,0 +1,44 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: grafana
+  labels:
+    prometheus/shared: "true"
+spec:
+  selector:
+    matchLabels:
+      app: grafana
+  endpoints:
+  - port: web
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard
+  labels:
+    grafana-dashboard/shared: "true"
+data:
+  grafana-dashboard.json: |-
+    {{ .Files.Get "files/grafana-dashboard.json" | indent 4 | trim }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: grafana
+  labels:
+    prometheus/shared: "true"
+spec:
+  groups:
+    - name: ./grafana.rules
+      rules:
+        - alert: GrafanaDeploymentHasNoReplicasAvailable
+          expr: kube_deployment_status_replicas_available{ deployment="grafana" } == 0
+          for: 5m
+          labels:
+            severity: warning
+            team: shared
+          annotations:
+            summary: |-
+              In the namespace {{"{{"}}$labels.namespace{{"}}"}} - There is no Grafana replicas available.
+              `kubectl get deployments grafana --namespace {{"{{"}}$labels.namespace{{"}}"}}`

@@ -1,0 +1,16 @@
+## config
+
+# auth:
+#  github:
+#   enabled: true
+#   allowSignUp: true
+#   clientId: fjfjfjfjfjfjfjfjfjfj
+#   clientSecret: fjfjfjfjfjfjfjfjfjfjfjfjfjfjfjfjf
+#   scopes: user:email,read:org
+#
+# domain: example.com
+# namespace: observe
+
+hasVolume: true
+dns:
+  enabled: false

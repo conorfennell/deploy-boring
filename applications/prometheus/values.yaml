@@ -1,7 +1,3 @@
-hasVolume: true
-dns:
-  enabled: false
-
 ## config
 
 # hasVolume: true
@@ -9,3 +5,7 @@ dns:
 #  enabled: true
 #  domain: example.com
 # namespace: observe
+
+hasVolume: true
+dns:
+  enabled: false
