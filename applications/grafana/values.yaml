@@ -4,7 +4,6 @@ auth:
   allowSignUp:
   clientId:
   clientSecret:
-  scopes:
   allowedOrganizations:
 
 # Dns domain for Grafana
