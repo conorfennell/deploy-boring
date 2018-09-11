@@ -1,3 +1,2 @@
-## config
-
-# namespace: observe
+# Namespace where prometheus operator is being deployed (to be replaced .Release.Namespace eventually )
+namespace: observe

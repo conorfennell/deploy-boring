@@ -6,7 +6,7 @@ metadata:
 data:
   custom.ini: |-
     [server]
-    root_url = http://grafana{{ .Values.dns.domain }}
+    root_url = http://grafana.{{ .Values.dns.domain }}
 
     [auth]
     disable_login_form = true
@@ -25,6 +25,7 @@ data:
     auth_url = https://github.com/login/oauth/authorize
     token_url = https://github.com/login/oauth/access_token
     api_url = https://api.github.com/user
+    allowed_organizations={{ .Values.auth.github.allowedOrganizations }}
     {{ end }}
 ---
 apiVersion: v1

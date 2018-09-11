@@ -1,15 +1,16 @@
-## config
+auth:
+ github:
+  enabled:
+  allowSignUp:
+  clientId:
+  clientSecret:
+  scopes:
+  allowedOrganizations:
 
-# auth:
-#  github:
-#   enabled: true
-#   allowSignUp: true
-#   clientId: fjfjfjfjfjfjfjfjfjfj
-#   clientSecret: fjfjfjfjfjfjfjfjfjfjfjfjfjfjfjfjf
-#   scopes: user:email,read:org
-#
-# domain: example.com
-# namespace: observe
-
+# Dns domain for Grafana
 dns:
-  enabled: false
+  enabled:
+  domain:
+
+# Namespace where grafana is being deployed (to be replaced .Release.Namespace eventually )
+namespace:

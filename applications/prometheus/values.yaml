@@ -1,11 +1,9 @@
-## config
-
-# hasVolume: true
-# dns:
-#  enabled: true
-#  domain: example.com
-# namespace: observe
-
-hasVolume: true
 dns:
-  enabled: false
+ enabled:
+ domain:
+
+# provisions a volume for prometheus
+hasVolume: 
+
+# Namespace where prometheus is being deployed (to be replaced .Release.Namespace eventually )
+namespace:
