@@ -1,7 +1,6 @@
-## config
-
-# dns:
-#   enabled: false
-
 dns:
-  enabled: false
+ enabled:
+ domain:
+
+# Namespace where alertmanager is being deployed (to be replaced .Release.Namespace eventually )
+namespace:
