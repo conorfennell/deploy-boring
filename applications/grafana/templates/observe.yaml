@@ -33,7 +33,7 @@ spec:
     - name: ./grafana.rules
       rules:
         - alert: GrafanaDeploymentHasNoReplicasAvailable
-          expr: kube_deployment_status_replicas_available{ deployment="grafana" } == 0
+          expr: kube_deployment_status_replicas_available{ deployment="grafana" } < 1
           for: 5m
           labels:
             severity: warning
