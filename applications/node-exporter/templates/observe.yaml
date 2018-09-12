@@ -12,3 +12,13 @@ spec:
   selector:
     matchLabels:
       app: node-exporter
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-exporter-dashboard
+  labels:
+    grafana-dashboard/shared: "true"
+data:
+  node-exporter-dashboard.json: |-
+    {{ .Files.Get "files/node-exporter-dashboard.json" | indent 4 | trim }}
