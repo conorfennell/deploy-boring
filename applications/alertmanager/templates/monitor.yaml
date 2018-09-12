@@ -19,7 +19,7 @@ metadata:
   labels:
     grafana-dashboard/shared: "true"
 data:
-  grafana-dashboard.json: |-
+  alertmanager-dashboard.json: |-
     {{ .Files.Get "files/alertmanager-dashboard.json" | indent 4 | trim }}
 ---
 apiVersion: monitoring.coreos.com/v1
