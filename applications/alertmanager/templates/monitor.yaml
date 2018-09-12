@@ -1,0 +1,42 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: alertmanager
+  labels:
+    prometheus/shared: "true"
+spec:
+  selector:
+    matchLabels:
+      app: alertmanager
+  endpoints:
+  - port: web
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-dashboard
+  labels:
+    grafana-dashboard/shared: "true"
+data:
+  grafana-dashboard.json: |-
+    {{ .Files.Get "files/alertmanager-dashboard.json" | indent 4 | trim }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus
+  labels:
+    prometheus/shared: "true"
+spec:
+  groups:
+    - name: ./prometheus.rules
+      rules:
+        - alert: PrometheusConfigLastReloadFailed
+          expr: prometheus_config_last_reload_successful == 0
+          for: 5m
+          labels:
+            severity: warning
+            team: shared
+          annotations:
+            summary: A Prometheus Rule is misconfigured. See the last that was applied by age `kubectl get prometheusrule --all-namespaces`
