@@ -16,17 +16,45 @@
   "editable": true,
   "gnetId": 4181,
   "graphTooltip": 0,
-  "id": 12,
-  "iteration": 1536752642027,
+  "id": 1,
+  "iteration": 1536761800073,
   "links": [],
   "panels": [
+    {
+      "content": "# Firing",
+      "gridPos": {
+        "h": 2,
+        "w": 11,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "links": [],
+      "mode": "markdown",
+      "title": "",
+      "type": "text"
+    },
+    {
+      "content": "# Pending",
+      "gridPos": {
+        "h": 2,
+        "w": 11,
+        "x": 12,
+        "y": 0
+      },
+      "id": 20,
+      "links": [],
+      "mode": "markdown",
+      "title": "",
+      "type": "text"
+    },
     {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 2
       },
       "id": 10,
       "panels": [],
@@ -56,7 +84,7 @@
         "h": 3,
         "w": 4,
         "x": 2,
-        "y": 1
+        "y": 3
       },
       "height": "75px",
       "id": 2,
@@ -122,7 +150,7 @@
         }
       ],
       "thresholds": "1,10",
-      "title": "Critical",
+      "title": "Critical [current]",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [],
@@ -150,7 +178,7 @@
         "h": 3,
         "w": 4,
         "x": 6,
-        "y": 1
+        "y": 3
       },
       "height": "75px",
       "id": 5,
@@ -197,7 +225,7 @@
         }
       ],
       "thresholds": "1,10",
-      "title": "Warning",
+      "title": "Warning [current]",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [],
@@ -225,7 +253,7 @@
         "h": 3,
         "w": 4,
         "x": 14,
-        "y": 1
+        "y": 3
       },
       "height": "75px",
       "id": 15,
@@ -291,7 +319,7 @@
         }
       ],
       "thresholds": "1,10",
-      "title": "Critical pending",
+      "title": "Critical [current]",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [],
@@ -319,7 +347,7 @@
         "h": 3,
         "w": 4,
         "x": 18,
-        "y": 1
+        "y": 3
       },
       "height": "75px",
       "id": 16,
@@ -366,7 +394,7 @@
         }
       ],
       "thresholds": "1,10",
-      "title": "Warning pending",
+      "title": "Warning [current]",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [],
@@ -378,7 +406,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 6
       },
       "id": 12,
       "panels": [],
@@ -392,9 +420,9 @@
       "fontSize": "100%",
       "gridPos": {
         "h": 6,
-        "w": 12,
+        "w": 11,
         "x": 0,
-        "y": 5
+        "y": 7
       },
       "id": 1,
       "links": [],
@@ -457,9 +485,9 @@
       "fontSize": "100%",
       "gridPos": {
         "h": 6,
-        "w": 12,
+        "w": 11,
         "x": 12,
-        "y": 5
+        "y": 7
       },
       "id": 3,
       "links": [],
@@ -521,9 +549,9 @@
       "fontSize": "100%",
       "gridPos": {
         "h": 6,
-        "w": 12,
+        "w": 11,
         "x": 0,
-        "y": 11
+        "y": 13
       },
       "id": 13,
       "links": [],
@@ -585,9 +613,9 @@
       "fontSize": "100%",
       "gridPos": {
         "h": 6,
-        "w": 12,
+        "w": 11,
         "x": 12,
-        "y": 11
+        "y": 13
       },
       "id": 14,
       "links": [],

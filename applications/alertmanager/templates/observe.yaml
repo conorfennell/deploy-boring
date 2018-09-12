@@ -25,12 +25,12 @@ data:
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: prometheus
+  name: alertmanager
   labels:
     prometheus/shared: "true"
 spec:
   groups:
-    - name: ./prometheus.rules
+    - name: ./alertmanager.rules
       rules:
         - alert: PrometheusConfigLastReloadFailed
           expr: prometheus_config_last_reload_successful == 0
