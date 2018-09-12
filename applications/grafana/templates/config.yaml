@@ -57,4 +57,4 @@ data:
       type: prometheus
       access: proxy
       isDefault: true
-      url: http://prometheus:9090
+      url: http://prometheus:80
