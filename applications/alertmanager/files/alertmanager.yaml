@@ -3,8 +3,8 @@ global:
   # team-news channel webhook
   slack_api_url: 'https://hooks.slack.com/services/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'
 route:
-  # This is the default receiver, is nothing else matches...
-  receiver: 'default-receiver'
+  # This is the default receiver, if nothing else matches...
+  receiver: 'team-shared-slack'
   group_by: ['alertname']
   # When a new group of alerts is created by an incoming alert, wait at
   # least 'group_wait' to send the initial notification.
@@ -24,11 +24,16 @@ route:
   # All the above attributes are inherited by all child routes and can
   # overwritten on each.
 
-  # The child route trees.  
+  # The child route trees.
+  routes:
+  - match:
+      team: shared
+    receiver: team-shared-slack
+
 receivers:
-- name: 'default-receiver'
+- name: 'team-shared-slack'
   slack_configs:
-  - channel: '#remove-me'
+  - channel: '#hbc-common-prod'
     title: "{{ .GroupLabels.alertname }} - {{ .Status | toUpper }}"
     title_link: "http://alertmanager.example.com/"
     text: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
