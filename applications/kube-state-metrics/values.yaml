@@ -1,0 +1,2 @@
+# Namespace where prometheus is being deployed (to be replaced .Release.Namespace eventually )
+namespace:
