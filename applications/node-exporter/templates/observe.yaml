@@ -22,3 +22,24 @@ metadata:
 data:
   node-exporter-dashboard.json: |-
     {{ .Files.Get "files/node-exporter-dashboard.json" | indent 4 | trim }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-exporter
+  labels:
+    prometheus/shared: "true"
+spec:
+  groups:
+    - name: ./node-exporter.rules
+      rules:
+        - alert: NodeExporterDaemonsetIsMissingReplicas
+          expr: kube_daemonset_status_number_unavailable{daemonset="node-exporter"} != 0
+          for: 5m
+          labels:
+            severity: warning
+            team: shared
+          annotations:
+            summary: |-
+              In the namespace {{"{{"}}$labels.namespace{{"}}"}} - There is unavailable node exporters.
+              `kubectl get daemonset node-exporter --namespace {{"{{"}}$labels.namespace{{"}}"}}`

@@ -1,0 +1,21 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus
+  labels:
+    prometheus/shared: "true"
+spec:
+  groups:
+    - name: ./prometheus.rules
+      rules:
+        - alert: PrometheusStatefulsetIsMissingReplicas
+          expr: kube_statefulset_status_replicas_ready{statefulset="prometheus-prometheus"} - kube_statefulset_status_replicas{statefulset="prometheus-prometheus"} != 0
+          for: 5m
+          labels:
+            severity: warning
+            team: shared
+          annotations:
+            summary: |-
+              In the namespace {{"{{"}}$labels.namespace{{"}}"}} - There is not the expected ready replicas for Prometheus.
+              `kubectl get statefulset prometheus-prometheus --namespace {{"{{"}}$labels.namespace{{"}}"}}`

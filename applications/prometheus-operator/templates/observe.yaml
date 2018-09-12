@@ -20,3 +20,24 @@ spec:
   namespaceSelector:
     matchNames:
     - kube-system
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus-operator
+  labels:
+    prometheus/shared: "true"
+spec:
+  groups:
+    - name: ./prometheus-operator.rules
+      rules:
+        - alert: GrafanaDeploymentHasNoReplicasAvailable
+          expr: kube_deployment_status_replicas_available{ deployment="grafana" } < 1
+          for: 5m
+          labels:
+            severity: warning
+            team: shared
+          annotations:
+            summary: |-
+              In the namespace {{"{{"}}$labels.namespace{{"}}"}} - There is no Grafana replicas available.
+              `kubectl get deployments grafana --namespace {{"{{"}}$labels.namespace{{"}}"}}`

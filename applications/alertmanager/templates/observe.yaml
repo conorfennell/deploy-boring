@@ -32,6 +32,16 @@ spec:
   groups:
     - name: ./alertmanager.rules
       rules:
+        - alert: AlertManagerStatefulsetIsMissingReplicas
+          expr: kube_statefulset_status_replicas_ready{statefulset="alertmanager-alertmanager"} - kube_statefulset_status_replicas{statefulset="alertmanager-alertmanager"} != 0
+          for: 5m
+          labels:
+            severity: warning
+            team: shared
+          annotations:
+            summary: |-
+              In the namespace {{"{{"}}$labels.namespace{{"}}"}} - There is not the expected ready replicas for Alertmanager.
+              `kubectl get statefulset alertmanager-alertmanager --namespace {{"{{"}}$labels.namespace{{"}}"}}`
         - alert: PrometheusConfigLastReloadFailed
           expr: prometheus_config_last_reload_successful == 0
           for: 5m

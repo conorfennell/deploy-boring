@@ -24,3 +24,24 @@ metadata:
 data:
   pod-dashboard.json: |-
     {{ .Files.Get "files/pod-dashboard.json" | indent 4 | trim }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kube-state-metrics
+  labels:
+    prometheus/shared: "true"
+spec:
+  groups:
+    - name: ./kube-state-metrics.rules
+      rules:
+        - alert: KubeStateMetricsDeploymentHasNoReplicasAvailable
+          expr: kube_deployment_status_replicas_available{ deployment="kube-state-metrics" } < 1
+          for: 5m
+          labels:
+            severity: warning
+            team: shared
+          annotations:
+            summary: |-
+              In the namespace {{"{{"}}$labels.namespace{{"}}"}} - There is no kube state metric replicas available.
+              `kubectl get deployments kube-state-metrics --namespace {{"{{"}}$labels.namespace{{"}}"}}`
