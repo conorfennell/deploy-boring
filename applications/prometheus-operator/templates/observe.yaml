@@ -1,3 +1,4 @@
+---
 # The prometheus operator exposes the kubelet as a service in the kube-system namespace
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

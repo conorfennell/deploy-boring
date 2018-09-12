@@ -14,3 +14,13 @@ spec:
   selector:
     matchLabels:
       app: kube-state-metrics
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pod-dashboard
+  labels:
+    grafana-dashboard/shared: "true"
+data:
+  pod-dashboard.json: |-
+    {{ .Files.Get "files/pod-dashboard.json" | indent 4 | trim }}
