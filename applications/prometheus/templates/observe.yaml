@@ -13,6 +13,16 @@ spec:
     matchLabels:
       app: prometheus
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-dashboard
+  labels:
+    grafana-dashboard/shared: "true"
+data:
+  node-exporter-dashboard.json: |-
+    {{ .Files.Get "files/prometheus-dashboard.json" | indent 4 | trim }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
